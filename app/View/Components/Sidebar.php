@@ -11,9 +11,17 @@ class Sidebar extends Component
     /**
      * Create a new component instance.
      */
+
+    public $links;
     public function __construct()
     {
-        //
+        $this->links = [[
+            'label' => 'Dashboard Analitik',
+            'route' => 'home',
+            'is_active' => request()->rootIs('home'),
+            'icon' => 'fas fa-chart-line',
+            'if_dropdown' => false,
+        ]];
     }
 
     /**
