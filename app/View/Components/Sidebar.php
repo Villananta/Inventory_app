@@ -18,7 +18,7 @@ class Sidebar extends Component
         $this->links = [[
             'label' => 'Dashboard Analitik',
             'route' => 'home',
-            'is_active' => request()->rootIs('home'),
+            'is_active' => request()->routeIs('home'),
             'icon' => 'fas fa-chart-line',
             'if_dropdown' => false,
         ]];
