@@ -16,4 +16,8 @@ class KategoriProdukController extends Controller
         return view('kategori-produk.index', compact('pageTitle', 'kategori'));
     }
 
+    public function store(Request $request){
+        
+    }
+
 }

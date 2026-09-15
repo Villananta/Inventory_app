@@ -3,6 +3,7 @@
 @section('content')
  <div class="div card">
     <div class="card-body py-5">
+        <x-kategori-produk.formkategori-produk/>
         <table class="table">
             <thead>
                 <tr>
