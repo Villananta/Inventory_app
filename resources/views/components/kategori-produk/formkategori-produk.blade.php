@@ -14,7 +14,7 @@
 <div class="modal fade" id="formKategori{{ $id ?? '' }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formKategoriLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="{{ $action }}">
+      <form action="{{ $action }}" method="POST">
         @csrf
         @if ($id)
         @method('PUT')
@@ -26,7 +26,7 @@
       <div class="modal-body">
         <div class="group">
             <label for="nama_kategori" class="form-label">Nama Kategori</label>
-            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" value="{{ old('nama_kategori', $KategoriProduk ?? '')  }}">
+            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" value="{{ old('nama_kategori', $name_kategori ?? '')  }}">
             @error('nama_kategori')
                 <small class="text-danger">{{ $message }}</small>
             @enderror

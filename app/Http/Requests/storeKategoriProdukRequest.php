@@ -12,7 +12,7 @@ class storeKategoriProdukRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,25 @@ class storeKategoriProdukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_kategori' => 'required|unique:kategori_produks,nama_kategori'
         ];
     }
+
+    public function messages():array{
+        return [
+            'nama_kategori.required' => ':attribute wajib diisi',
+            'nama_kategori.unique' => ':attribute sudah ada, gunakan nama lain',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'nama_kategori' => 'Nama kategori',
+        ];
+        toast()->success('Kategori Produk Berhasil Ditambahkan');
+        return redirect()->route('master-data.kategori-produk.index');
+    }
+
+    
 }

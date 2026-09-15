@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeKategoriProdukRequest;
 use App\Models\KategoriProduk;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,12 @@ class KategoriProdukController extends Controller
         return view('kategori-produk.index', compact('pageTitle', 'kategori'));
     }
 
-    public function store(Request $request){
-        
+    public function store(storeKategoriProdukRequest $request){
+        KategoriProduk::create([
+            'nama_kategori' => $request->nama_kategori
+        ]);
+
+        return redirect()->route('master-data.kategori-produk.index')->with('success', 'Kategori berhasil disimpan');
     }
 
 }
