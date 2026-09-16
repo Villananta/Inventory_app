@@ -26,7 +26,7 @@ class Sidebar extends Component
             [
             'label' => 'Master data',
             'route' => '#',
-            'is_active' => request()->routeIs('master-date.*'),
+            'is_active' => request()->routeIs('master-data.*'),
             'icon' => 'fas fa-cloud',
             'if_dropdown' => true,
             'items' => [

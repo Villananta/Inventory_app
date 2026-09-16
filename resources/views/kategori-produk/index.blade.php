@@ -17,6 +17,12 @@
                 <tr>
                     <td>{{ $loop->iteration + $kategori->firstItem() - 1 }}</td>
                     <td>{{ $item->nama_kategori }}</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2" >
+                            <x-kategori-produk.formkategori-produk id="{{ $item->id }}"/>
+                            <x-confirm-delete id="{{ $item->id }}" route="master-data.kategori-produk.destroy"/>
+                        </div>
+                    </td>
                 </tr>
                 @empty
                 <tr>
