@@ -13,8 +13,17 @@ class KategoriProdukController extends Controller
     public function index(){
 
         $pageTitle = $this->pageTitle;
+        $perPage = request()->query('perPage') ?? 10;
         $query = KategoriProduk::query();
-        $kategori = $query->paginate(10);
+
+        $perPageOptions = [10, 25, 50, 100];
+        $perPage = (int) request('perPage', 10);
+
+        if (! in_array($perPage, $perPageOptions, true)) {
+            $perPage = 10;
+        }
+
+        $kategori = $query->paginate($perPage)->withQueryString();
         confirmDelete('Produk yang dihapus tidak dapat dikembalikan, lanjutkan?');
         return view('kategori-produk.index', compact('pageTitle', 'kategori'));
     }
