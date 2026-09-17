@@ -48,14 +48,14 @@ public function index(){
         $kategoriProduk->nama_kategori = $request->nama_kategori;
         $kategoriProduk->save();
 
-        toast()->success('Kategori produk berhasil diubah');
+        toast('Kategori produk berhasil diubah', 'success');
         return redirect()->route('master-data.kategori-produk.index');
     }
 
     public function destroy(KategoriProduk $kategoriProduk){
         $kategoriProduk->delete();
 
-        toast()->success('Kategori produk berhasil dihapus');
+        toast('Kategori produk berhasil dihapus', 'success');
         return redirect()->route('master-data.kategori-produk.index');
     }
 
