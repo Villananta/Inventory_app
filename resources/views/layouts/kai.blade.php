@@ -228,6 +228,7 @@
     <!-- Kaiadmin JS -->
     <script src="{{ asset('template') }}/assets/js/kaiadmin.min.js"></script>
 
-    
+    @stack('scripts')
+
   </body>
 </html>

@@ -10,11 +10,9 @@ use Illuminate\Http\Request;
 class KategoriProdukController extends Controller
 {
     public $pageTitle = 'Kategori Produk';
-    public function index(){
-
+public function index(){
         $pageTitle = $this->pageTitle;
-        $perPage = request()->query('perPage') ?? 10;
-        $query = KategoriProduk::query();
+        $search = request()->query('search');
 
         $perPageOptions = [10, 25, 50, 100];
         $perPage = (int) request('perPage', 10);
@@ -23,8 +21,18 @@ class KategoriProdukController extends Controller
             $perPage = 10;
         }
 
-        $kategori = $query->paginate($perPage)->withQueryString();
+        $kategori = KategoriProduk::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama_kategori', 'like', "%{$search}%");
+            })
+            ->paginate($perPage)
+            ->withQueryString();
         confirmDelete('Produk yang dihapus tidak dapat dikembalikan, lanjutkan?');
+
+        if (request()->ajax()) {
+            return view('kategori-produk._table', compact('kategori'))->render();
+        }
+
         return view('kategori-produk.index', compact('pageTitle', 'kategori'));
     }
 
