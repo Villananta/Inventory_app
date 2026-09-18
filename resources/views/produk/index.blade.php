@@ -3,7 +3,13 @@
 @section('content')
     <div class="card">
         <div class="card-body py-5">
-            <table class="table">
+            <div row align-items-center>
+                <div class="row col-10"></div>
+                <div class="row col-2 d-flex justify-content-end">
+                    <x-produk.form-produk/>
+                </div>
+            </div>
+            <table class="table mt-5">
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 15px">No</th>
