@@ -35,11 +35,25 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </select>
+            <div class="form-group">
+                <label for="nama_produk" class="form-label">Nama Produk</label>
+                <input type="text" name="nama_produk" id="nama_produk" class="form-control" value="{{ old('nama_produk', $nama_produk ?? '') }}">
+                @error('nama_produk')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="deskripsi_produk" class="form-label">Deskripsi</label>
+                <textarea name="deskripsi_produk" id="deskripsi_produk" cols="30" rows="5" class="form-control">{{ old('deskripsi_produk', $deskripsi_produk ?? '') }}</textarea>
+                @error('deskripsi_produk')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-white" data-bs-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
       </div>
       </form>
     </div>
