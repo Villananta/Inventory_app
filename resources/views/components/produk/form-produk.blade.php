@@ -24,7 +24,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        ...
+        <div class="form-group">
+            <label for="kategori_produk_id" class="form-label">Kategori Produk</label>
+            <select name="kategori_produk_id" id="kategori_produk_id" class="form-label">
+                <option value="">Pilih Kategori</option>
+                @foreach ( $kategori as $item )
+                <option value="{{ $item->id }}" {{ old('kategori_produk_id', $kategori_produk_id ?? '' ) == $item->id ? 'selected' : '' }}>{{ $item->nama_kategori }}</option>
+                @endforeach
+                @error('kategori_produk_id')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </select>
+        </div>
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
