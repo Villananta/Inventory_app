@@ -1,9 +1,9 @@
 @extends('layouts.kai')
-@section('page_Title', $pageTitle)
+@section('page_title', $pageTitle)
 @section('content')
     <div class="card">
         <div class="card-body py-5">
-            <div row align-items-center>
+            <div class="row align-items-center">
                 <div class="row col-10"></div>
                 <div class="row col-2 d-flex justify-content-end">
                     <x-produk.form-produk/>
@@ -26,8 +26,8 @@
                             <td>{{ $item->kategori->nama_kategori }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center gap-2" >
-                                <x-kategori-produk.formkategori-produk id="{{ $item->id }}"/>
-                                <x-confirm-delete id="{{ $item->id }}" route="master-data.kategori-produk.destroy"/>
+                                <x-produk.form-produk id="{{ $item->id }}" route="master-data.produk.update"/>
+                                <x-confirm-delete id="{{ $item->id }}" route="master-data.produk.destroy"/>
                             </div>
                             </td>
                         </tr>

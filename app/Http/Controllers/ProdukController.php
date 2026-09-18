@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\storeProdukRequest;
+use App\Http\Requests\updateProdukRequest;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,22 @@ class ProdukController extends Controller
             'kategori_produk_id' => $request->kategori_produk_id,
         ]);
         toast()->success('Produk berhasil ditambahkan');
+        return redirect()->route('master-data.produk.index');
+    }
+
+    public function destroy(Produk $produk){
+        $produk->delete();
+        toast()->success('Produk berhasil dihapus');
+        return redirect()->route('master-data.produk.index');
+    }
+
+    public function update(updateProdukRequest $request, Produk $produk){
+        $produk->nama_produk = $request->nama_produk;
+        $produk->deskripsi_produk = $request->deskripsi_produk;
+        $produk->kategori_produk_id = $request->kategori_produk_id;
+        $produk->save();
+
+        toast('Produk berhasil diubah', 'success');
         return redirect()->route('master-data.produk.index');
     }
 }
