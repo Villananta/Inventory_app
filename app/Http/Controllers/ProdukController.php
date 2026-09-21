@@ -11,18 +11,30 @@ class ProdukController extends Controller
 {
     public $pageTitle = 'Data Produk';
     public function index(){
-        $query = Produk::query();
-        $perPage = request()->query('perPage') ?? 10;
-        $search = request()->query('search');
         $pageTitle = $this->pageTitle;
+        $search = request()->query('search');
 
-        $query->with('kategori:id,nama_kategori');
-        if ($search) {
-            $query->where('nama_produk', 'like', '%' . $search . '%');
+        $perPageOptions = [10, 25, 50, 100];
+        $perPage = (int) request('perPage', 10);
+
+        if (! in_array($perPage, $perPageOptions, true)) {
+            $perPage = 10;
         }
 
-        $produk = $query->orderBy('created_at', 'DESC')->paginate($perPage)->appends(request()->query());
+        $produk = Produk::query()
+            ->with('kategori:id,nama_kategori')
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama_produk', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage)
+            ->withQueryString();
         confirmDelete('Menghapus data produk akan menghapus seluruh varian yang ada, lanjutkan?');
+
+        if (request()->ajax()) {
+            return view('produk._table', compact('produk'))->render();
+        }
+
         return view('produk.index', compact('pageTitle', 'produk'));
     }
 
@@ -40,6 +52,11 @@ class ProdukController extends Controller
         $produk->delete();
         toast()->success('Produk berhasil dihapus');
         return redirect()->route('master-data.produk.index');
+    }
+
+    public function show(Produk $produk){
+        $pageTitle = $this->pageTitle;
+        return view('produk.show', compact('pageTitle', 'produk'));
     }
 
     public function update(updateProdukRequest $request, Produk $produk){
