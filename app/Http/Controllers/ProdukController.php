@@ -56,6 +56,7 @@ class ProdukController extends Controller
 
     public function show(Produk $produk){
         $pageTitle = $this->pageTitle;
+        confirmDelete('Varian akan dihapus, lanjutkan?');
         return view('produk.show', compact('pageTitle', 'produk'));
     }
 
