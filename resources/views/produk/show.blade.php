@@ -16,7 +16,9 @@
     <div class="card mt-4">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title mb-0">Varian Produk</h4>
-            <button class="btn btn-primary btn-sm">Tambah Varian</button>
+            <button type="button" class="btn btn-dark btn-sm btn-sm" data-bs-toggle="modal" data-bs-target="#modalFormVarian" id="btnTambahVarian">
+                Tambah Varian
+            </button>
         </div>
         <div class="card-body">
             <div class="alert alert-info mb-0">
@@ -24,4 +26,48 @@
             </div>
         </div>
     </div>
+<x-produk.form-varian/>
 @endsection
+
+@push('scripts')
+
+let modalEl = $('#modalFormVarian');
+let modal = new bootstrap.Modal(modalEl);
+let $form = $('$modalFormVarian form');
+    <script>
+        $(document).ready(function() {
+            $(#btnTambahVarian).on('clik', function() {
+                $form[0].reset();
+                $form.attr('action');
+                $form.find('small.text-danger').text('');
+                $('modalFormVarian. modal-title').text('Tambah Varian Baru')
+                modal.show;
+            })
+
+            $form.submit(function(e){
+                e.preventDefault();
+                let FormData = new FormData(this);
+
+                $.ajax({
+                    type:$form.attr('method'),
+                    url: $form.attr('action'),
+                    data: FormData,
+                    processData:false;
+                    contentType:false;                    
+                    success: function (response){
+                        alert('okai tek')
+                    }
+                    error: function (xhr){
+                        console.log(errors);
+                        
+                        let errors = xhr.responseJSON.errors;
+                        $form.find('small.text-danger').text('');
+                        $.each(errors, function(key,val){
+                            $form.find(['name="' + key + '"']).next('small.text-danger').text(val[0]);
+                        }) 
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

@@ -13,6 +13,7 @@
       href="{{ asset('template') }}/assets/img/kaiadmin/favicon.ico"
       type="image/x-icon"
     />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <!-- Fonts and icons -->
     <script src="{{ asset('template') }}/assets/js/plugin/webfont/webfont.min.js"></script>
